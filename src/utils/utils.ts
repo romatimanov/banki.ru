@@ -1,7 +1,7 @@
-import { CardUiProps } from "../ui/ProductCard";
+import { ProductCardProps } from "../ui/ProductCard";
 
 // Функция для сортировки по сумме от мин до макс
-export const sortProducts = <T extends CardUiProps>(
+export const sortProducts = <T extends ProductCardProps>(
   products: T[],
   sortBy: string
 ): T[] => {
@@ -15,7 +15,7 @@ export const sortProducts = <T extends CardUiProps>(
 };
 
 // Функция для сортировки по сумме
-export const filterProducts = <T extends CardUiProps>(
+export const filterProducts = <T extends ProductCardProps>(
   products: T[],
   searchTerm: string
 ): T[] => {
