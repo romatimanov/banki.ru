@@ -11,6 +11,7 @@
 }
 .sceleton-image-container {
   display: flex;
+  align-items: center;
   gap: 30px;
   margin-bottom: 20px;
 }
@@ -19,19 +20,18 @@
   justify-content: space-between;
 }
 .sceleton-text {
-  width: 300px;
+  width: 100px;
   height: 5px;
   color: transparent;
 }
 .sceleton-title {
-  margin-top: 20px;
   height: 10px;
 }
 .sceleton-text:nth-last-child(3n) {
   margin-bottom: 25px;
 }
 .sceleton-text:nth-last-child(-n + 2) {
-  width: 150px;
+  width: 100px;
 }
 
 .image-sceleton {
