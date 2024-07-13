@@ -60,7 +60,7 @@ export function FilterCompanent() {
           marginLeft: "auto",
           marginBottom: "15px",
           "@media (max-width: 500px)": {
-            marginRight: "auto",
+            fontSize: "10px",
           },
         }}
       >

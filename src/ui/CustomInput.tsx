@@ -25,6 +25,9 @@ const InputBox = styled("div")({
   justifyContent: "center",
   alignItems: "center",
   marginBottom: 15,
+  "@media (max-width: 500px)": {
+    marginBottom: 5,
+  },
 });
 
 type CustomInputProps = {
