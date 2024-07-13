@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { saveFilter } from "../utils/saveFilter";
 import { filterProducts, sortProducts } from "../utils/utils";
 import mockData from "../../mock.json";
@@ -6,6 +6,8 @@ import { CustomInput } from "../ui/CustomInput";
 import { SortProducts } from "../ui/SortProducts";
 import { ProductCard } from "../ui/ProductCard";
 import { Button } from "@mui/material";
+import { ProductCardSceleton } from "../ui/ProductCardSceleton";
+
 export function FilterCompanent() {
   const queryParams = new URLSearchParams(window.location.search);
   const initialFilterBy = queryParams.get("filterBy") || "";
@@ -14,6 +16,17 @@ export function FilterCompanent() {
   const [filterBy, setFilterBy] = useState<string>(initialFilterBy);
   const [inputValue, setInputValue] = useState<string>("");
   const [resetInput, setResetInput] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [products, setProducts] = useState<any[]>([]);
+  const arrNumber = [1, 2, 3, 4, 5];
+
+  // имитация загрузки карточек
+  useEffect(() => {
+    setTimeout(() => {
+      setProducts(mockData.products);
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const handleSortingChange = (value: string) => {
     setSortBy(value);
@@ -25,16 +38,15 @@ export function FilterCompanent() {
 
   saveFilter({ filterBy, sortBy });
 
-  // филтрация из селетка или из инпута
-
   const filteredProducts = filterBy
     ? filterProducts(
-        mockData.products.filter((product) =>
+        products.filter((product) =>
           product.name.toLowerCase().includes(inputValue.toLowerCase())
         ),
         filterBy
       )
-    : mockData.products;
+    : products;
+
   const sortedAndFilteredProducts = sortProducts(filteredProducts, sortBy);
 
   const resetFilter = () => {
@@ -67,14 +79,16 @@ export function FilterCompanent() {
         Сброс фильтров
       </Button>
       <SortProducts onChange={handleSortingChange} sortBy={sortBy} />
-      {sortedAndFilteredProducts.map((product) => (
-        <ProductCard
-          key={product.name}
-          amount={product.amount}
-          name={product.name}
-          logo={product.logo}
-        />
-      ))}
+      {loading
+        ? arrNumber.map((item) => <ProductCardSceleton key={item} />)
+        : sortedAndFilteredProducts.map((product) => (
+            <ProductCard
+              key={product.name}
+              amount={product.amount}
+              name={product.name}
+              logo={product.logo}
+            />
+          ))}
     </>
   );
 }

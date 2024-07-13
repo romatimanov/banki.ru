@@ -12,7 +12,7 @@ const CenteredContainer = styled(Container)({
 
 const App = () => {
   return (
-    <CenteredContainer maxWidth="lg">
+    <CenteredContainer maxWidth="lg" sx={{ overflow: "hidden" }}>
       <FilterCompanent />
     </CenteredContainer>
   );
