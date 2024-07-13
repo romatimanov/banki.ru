@@ -6,7 +6,6 @@ const CenteredContainer = styled(Container)({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  height: "100vh",
   padding: "20px",
 });
 
