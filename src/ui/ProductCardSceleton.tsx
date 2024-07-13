@@ -3,7 +3,6 @@ import { Card, CardContent, styled } from "@mui/material";
 const SceletonCard = styled(Card)(() => ({
   position: "relative",
   width: "100%",
-  marginBottom: "15px",
   overflow: "visible",
   borderRadius: "15px",
   "&::before": {
