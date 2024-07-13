@@ -5,7 +5,6 @@ const StyledCard = styled(Card)({
   width: "100%",
   overflow: "visible",
   borderRadius: "15px",
-  marginBottom: 12,
 });
 
 const ImageContainer = styled("div")({

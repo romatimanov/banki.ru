@@ -9,56 +9,6 @@
 .sceleton {
   animation: sceleton-loader 1s linear infinite alternate;
 }
-.sceleton-image-container {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  margin-bottom: 20px;
-}
-.sceleton-amount-container {
-  display: flex;
-  justify-content: space-between;
-}
-.sceleton-text {
-  width: 100px;
-  height: 5px;
-  color: transparent;
-}
-.sceleton-title {
-  height: 10px;
-}
-.sceleton-text:nth-last-child(3n) {
-  margin-bottom: 25px;
-}
-.sceleton-text:nth-last-child(-n + 2) {
-  width: 100px;
-}
-
-.image-sceleton {
-  width: 100px;
-  height: 100px;
-  border-radius: 20px;
-}
-.sceleton-card {
-  position: relative;
-  width: 100%;
-  margin-bottom: 15px;
-}
-.sceleton-card::before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, transparent, #efefef, transparent);
-  transform: translateX(-100%);
-  animation: wave 2s infinite;
-}
-@keyframes wave {
-  100% {
-    transform: translateX(100%);
-  }
-}
 
 @keyframes sceleton-loader {
   0% {

@@ -5,8 +5,15 @@ import mockData from "../../mock.json";
 import { CustomInput } from "../ui/CustomInput";
 import { SortProducts } from "../ui/SortProducts";
 import { ProductCard } from "../ui/ProductCard";
-import { Button } from "@mui/material";
+import { Button, styled } from "@mui/material";
 import { ProductCardSceleton } from "../ui/ProductCardSceleton";
+
+const Products = styled("div")({
+  width: "100%",
+  display: "grid",
+  gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+  gridGap: "15px",
+});
 
 export function FilterCompanent() {
   const queryParams = new URLSearchParams(window.location.search);
@@ -79,9 +86,15 @@ export function FilterCompanent() {
         Сброс фильтров
       </Button>
       <SortProducts onChange={handleSortingChange} sortBy={sortBy} />
-      {loading
-        ? arrNumber.map((item) => <ProductCardSceleton key={item} />)
-        : sortedAndFilteredProducts.map((product) => (
+      {loading ? (
+        <Products>
+          {arrNumber.map((item) => (
+            <ProductCardSceleton key={item} />
+          ))}
+        </Products>
+      ) : (
+        <Products>
+          {sortedAndFilteredProducts.map((product) => (
             <ProductCard
               key={product.name}
               amount={product.amount}
@@ -89,6 +102,8 @@ export function FilterCompanent() {
               logo={product.logo}
             />
           ))}
+        </Products>
+      )}
     </>
   );
 }
