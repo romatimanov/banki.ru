@@ -16,7 +16,7 @@ export function saveFilter({ filterBy, sortBy }: SaveFilterProps) {
     const newUrl = `${window.location.pathname}${
       searchParams.toString() ? `?${searchParams.toString()}` : ""
     }`;
-    window.history.pushState({}, "", newUrl);
+    window.history.replaceState({}, "", newUrl);
 
     localStorage.setItem("savedFilter", filterBy);
   }, [filterBy, sortBy]);

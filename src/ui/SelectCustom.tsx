@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   FormControl,
   InputLabel,
@@ -8,9 +7,12 @@ import {
   styled,
 } from "@mui/material";
 
-type SortProductsProps = {
-  onChange: (value: string) => void;
-  sortBy: string;
+export type SelectCustomType = {
+  handleChange: (event: SelectChangeEvent<unknown>) => void;
+  value: string;
+  children: React.ReactNode;
+  title: string;
+  text: string;
 };
 
 const StyledFormControl = styled(FormControl)({
@@ -37,35 +39,27 @@ const StyledSelect = styled(Select)({
   borderRadius: "10px",
 });
 
-export function SortProducts({
-  onChange,
-  sortBy,
-}: SortProductsProps): JSX.Element {
-  useEffect(() => {
-    localStorage.setItem("savedFilter", sortBy);
-  }, [sortBy]);
-
-  const handleChange = (event: SelectChangeEvent<unknown>) => {
-    const selectedValue = event.target.value as string;
-    onChange(selectedValue);
-    localStorage.setItem("sortBy", selectedValue);
-  };
-
+export function SelectCustom({
+  handleChange,
+  value,
+  children,
+  title,
+  text,
+}: SelectCustomType): JSX.Element {
   return (
     <StyledFormControl>
-      <StyledInputLabel id="sorting-label">Сортировка</StyledInputLabel>
+      <StyledInputLabel id="sorting-label">{title}</StyledInputLabel>
       <StyledSelect
         labelId="sorting-label"
         id="sorting-select"
-        value={sortBy}
+        value={value}
         onChange={handleChange}
-        label="Сортировка"
+        label={title}
       >
         <StyledMenuItem disabled value="">
-          Сортировать
+          {text}
         </StyledMenuItem>
-        <MenuItem value={"min"}>По минимальной сумме</MenuItem>
-        <MenuItem value={"max"}>По максимальной сумме</MenuItem>
+        {children}
       </StyledSelect>
     </StyledFormControl>
   );

@@ -26,7 +26,7 @@ const SceletonImageContainer = styled("div")({
   display: "flex",
   alignItems: "center",
   gap: "30px",
-  marginBottom: "20px",
+  marginBottom: "18px",
 });
 
 const SceletonAmountContainer = styled("div")({
@@ -38,10 +38,10 @@ const SceletonText = styled("div")({
   width: "100px",
   height: "5px",
   color: "transparent",
-  "&:nth-last-child(3n)": {
+  "&:nth-last-of-type(3n)": {
     marginBottom: "25px",
   },
-  "&:nth-last-child(-n + 2)": {
+  "&:nth-last-of-type(-n + 2)": {
     width: "100px",
   },
 });

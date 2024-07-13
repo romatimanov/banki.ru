@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { saveFilter } from "../utils/saveFilter";
 import { filterProducts, sortProducts } from "../utils/utils";
 import mockData from "../../mock.json";
-import { CustomInput } from "../ui/CustomInput";
-import { SortProducts } from "../ui/SortProducts";
 import { ProductCard } from "../ui/ProductCard";
 import { Button, styled } from "@mui/material";
 import { ProductCardSceleton } from "../ui/ProductCardSceleton";
+import { SearchInput } from "../SearcInput/SearchInput";
+import { SortCompanent } from "../SortCompanent/SortCompanent";
 
 const Products = styled("div")({
   width: "100%",
@@ -20,7 +20,15 @@ export function FilterCompanent() {
   const initialFilterBy = queryParams.get("filterBy") || "";
   const initialSortBy = queryParams.get("sortBy") || "";
   const [sortBy, setSortBy] = useState<string>(initialSortBy);
-  const [filterBy, setFilterBy] = useState<string>(initialFilterBy);
+  // если в моковых данных есть значение то присваиваем его, если нет то присваиваем свое значение
+  const [filterBy, setFilterBy] = useState<string>(
+    mockData.filter &&
+      typeof mockData.filter.amount !== "undefined" &&
+      mockData.filter.amount !== null
+      ? String(mockData.filter.amount)
+      : initialFilterBy
+  );
+
   const [inputValue, setInputValue] = useState<string>("");
   const [resetInput, setResetInput] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -45,6 +53,8 @@ export function FilterCompanent() {
 
   saveFilter({ filterBy, sortBy });
 
+  // фильтрация и сортировка
+
   const filteredProducts = filterBy
     ? filterProducts(
         products.filter((product) =>
@@ -55,6 +65,8 @@ export function FilterCompanent() {
     : products;
 
   const sortedAndFilteredProducts = sortProducts(filteredProducts, sortBy);
+
+  // сброс фильтров
 
   const resetFilter = () => {
     localStorage.removeItem("savedFilter");
@@ -67,7 +79,7 @@ export function FilterCompanent() {
 
   return (
     <>
-      <CustomInput
+      <SearchInput
         onChange={handleFilterChange}
         initialValue={inputValue}
         resetInput={resetInput}
@@ -85,7 +97,7 @@ export function FilterCompanent() {
       >
         Сброс фильтров
       </Button>
-      <SortProducts onChange={handleSortingChange} sortBy={sortBy} />
+      <SortCompanent sortBy={sortBy} onChange={handleSortingChange} />
       {loading ? (
         <Products>
           {arrNumber.map((item) => (

@@ -30,20 +30,22 @@ const InputBox = styled("div")({
   },
 });
 
-type CustomInputProps = {
+type SearchInputProps = {
   onChange: (value: string) => void;
   initialValue: string;
   resetInput: boolean;
   onResetComplete: () => void;
 };
 
-export function CustomInput({
+export function SearchInput({
   onChange,
   initialValue,
   resetInput,
   onResetComplete,
-}: CustomInputProps): JSX.Element {
+}: SearchInputProps): JSX.Element {
   const [inputValue, setInputValue] = useState(initialValue);
+
+  // сбрасываем значение ввода при смене фильтра
 
   useEffect(() => {
     if (resetInput) {
@@ -53,6 +55,8 @@ export function CustomInput({
     }
   }, [resetInput, onChange, onResetComplete]);
 
+  // загружаем значение из локального хранилища
+
   useEffect(() => {
     const storedValue = localStorage.getItem("savedFilter");
     if (storedValue !== null) {
@@ -60,6 +64,8 @@ export function CustomInput({
       onChange(storedValue);
     }
   }, [onChange]);
+
+  // сохраняем значение в локальное хранилище
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
