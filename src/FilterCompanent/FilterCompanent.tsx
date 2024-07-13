@@ -54,7 +54,16 @@ export function FilterCompanent() {
         resetInput={resetInput}
         onResetComplete={() => setResetInput(false)}
       />
-      <Button onClick={resetFilter} sx={{ marginLeft: "auto" }}>
+      <Button
+        onClick={resetFilter}
+        sx={{
+          marginLeft: "auto",
+          marginBottom: "15px",
+          "@media (max-width: 500px)": {
+            marginRight: "auto",
+          },
+        }}
+      >
         Сброс фильтров
       </Button>
       <SortProducts onChange={handleSortingChange} sortBy={sortBy} />

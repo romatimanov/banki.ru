@@ -33,7 +33,9 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
     backgroundColor: theme.palette.common.white,
   },
 }));
-const StyledSelect = styled(Select)({});
+const StyledSelect = styled(Select)({
+  borderRadius: "10px",
+});
 
 export function SortProducts({
   onChange,
